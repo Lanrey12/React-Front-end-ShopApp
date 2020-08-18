@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
+import {  BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 import { Alert } from '../src/account/alert/alertCmp'
 import { Nav } from '../src/util/Nav'
 import { Role } from '../src/util/role'
@@ -22,8 +22,15 @@ import CreateConnect from '../src/account/pages/admin/users/createUser';
 import { Update } from './account/pages/profile/update';
 import { Details } from './account/pages/profile/details';
 import { createBrowserHistory } from 'history';
-
+//
 import { PrivateRoute } from '../src/component/PrivateRoute'
+
+//
+import UploadProductPage from '../src/shop/UploadProductPage'
+import LandingPage from '../src/shop/LandingPage'
+import DetailProductPage from '../src/shop/views/DetailProductPage/DetailProductPage'
+import CartPage from './shop/views/CartPage/CartPage';
+import HistoryPage from './shop/views/HistoryPage/HistoryPage';
 
 const theme = createMuiTheme({
   palette: {
@@ -56,11 +63,14 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
     <div className="App">
-     <Router history = {history}>
+     <Router>
+    
      <Nav />
+    
       <div className = "container">
         <Alert/>
        <Switch>
+       
          <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
          <Route exact path="/account/register" component={register} />
          <Route exact path="/account/verify-email" component={ VerifyEmail} />
@@ -74,6 +84,11 @@ function App() {
          <PrivateRoute exact path="/profile" component={ Details } />
          <PrivateRoute exact path="/profile/update" component={ Update } />
          <PrivateRoute exact path="/" component={Home} />
+         <PrivateRoute exact path="/product/add"  component={UploadProductPage} />
+         <PrivateRoute exact path="/products"  component={LandingPage} />
+         <PrivateRoute exact path="/product/:productId"  component={DetailProductPage} />
+         <PrivateRoute exact path="/user/cart"  component={CartPage} />
+         <PrivateRoute exact path="/user/history"  component={HistoryPage} />
          <Redirect from="*" to="/" />
        </Switch>
       </div>

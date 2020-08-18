@@ -1,4 +1,4 @@
-import { REGISTER_USER, VERIFY_USER, LOGIN_USER, FORGOT_PASSWORD, RESET_PASSWORD, VALIDATE_TOKEN, GET_USERS, GET_ONE_USER, LOGOUT_USER, UPDATE_USER, ADD_USER, DELETE_USER } from "../type"
+import { ON_SUCCESS_BUY, GET_CART_ITEMS_USER, REMOVE_CART_ITEM_USER, REGISTER_USER, ADD_TO_CART_USER, VERIFY_USER, LOGIN_USER, FORGOT_PASSWORD, RESET_PASSWORD, VALIDATE_TOKEN, GET_USERS, GET_ONE_USER, LOGOUT_USER, UPDATE_USER, ADD_USER, DELETE_USER } from "../type"
 
 const initialState = {
     users: [],
@@ -70,6 +70,38 @@ export default function(state = initialState, action){
             return{
                 ...state
             }
+        case ADD_TO_CART_USER:
+            return{
+              ...state,
+              userData:{
+                  ...state.userData, 
+                  cart: action.payload
+              }  
+            }
+        case GET_CART_ITEMS_USER:
+            return{
+                ...state,
+                cartDetail: action.payload
+            }
+        case REMOVE_CART_ITEM_USER:
+            return{
+                ...state,
+                cartDetail: action.payload.cartDetail,
+                userData:{
+                    ...state.userData,
+                    cart: action.payload.cart
+                }
+            }
+        case ON_SUCCESS_BUY: 
+           return {
+               ...state,
+               userData:{
+                   ...state.userData,
+                   cart: action.payload.cart
+               },
+               cartDetail: action.payload.cartDetail
+
+           }
             default:
                 return state
     }
