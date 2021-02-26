@@ -36,6 +36,7 @@ function Nav({ history }) {
   const classes = useStyles();
   const [user, setUser] = useState({});
   const [userData, setuserData] = useState({})
+  const id = userData.id
 
   const getUser = () => {
     const subscription = accountService.user.subscribe((x) => setUser(x));
@@ -58,7 +59,7 @@ function Nav({ history }) {
     dispatch(logoutUser());
   }
 
-    const id = accountService.userValue.id
+    
    
     
     
